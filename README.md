@@ -1,4 +1,4 @@
-# MiniOS (working name)
+# MiniOS
 
 MiniOS is a **minimal, educational operating system** built to help backend developers understand  
 how real servers work **under the hood** — from memory and concurrency to networking and IO.
