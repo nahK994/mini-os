@@ -6,6 +6,7 @@
 #define SCREEN_HEIGHT 25
 
 int cursor_position = 0;
+extern char _kernel_end;
 
 // screen clear করে
 void clear_screen() {
@@ -39,6 +40,21 @@ void print_char(char c) {
     cursor_position++;
 }
 
+void print_hex(unsigned int num) {
+    char hex_chars[] = "0123456789ABCDEF";
+    char buffer[9]; // 8 hex digits + null
+    buffer[8] = '\0';
+
+    for (int i = 7; i >= 0; i--) {
+        buffer[i] = hex_chars[num & 0xF];
+        num >>= 4;
+    }
+
+    print("0x");
+    print(buffer);
+}
+
+
 // string print করে
 void print(const char* str) {
     int i = 0;
@@ -52,5 +68,7 @@ void print(const char* str) {
 void kernel_main() {
     clear_screen();
     print("MiniOS is running...\n");
-    print("Welcome to your first OS!");
+    print("Welcome to your first OS!\n");
+    print("Kernel end address: ");
+    print_hex((unsigned int)&_kernel_end);
 }
