@@ -2,8 +2,10 @@ CC = gcc
 AS = nasm
 LD = ld
 
-CFLAGS = -m32 -ffreestanding -fno-stack-protector -nostdlib
+CFLAGS = -m32 -ffreestanding -fno-stack-protector -nostdlib -Ikernel
 LDFLAGS = -m elf_i386
+
+OBJS = boot.o kernel.o memory.o
 
 all: kernel.bin
 
@@ -13,11 +15,14 @@ boot.o:
 kernel.o:
 	$(CC) $(CFLAGS) -c kernel/kernel.c -o kernel.o
 
-kernel.bin: boot.o kernel.o
-	$(LD) $(LDFLAGS) -T linker.ld -o kernel.bin boot.o kernel.o
+memory.o:
+	$(CC) $(CFLAGS) -c kernel/memory.c -o memory.o
+
+kernel.bin: $(OBJS)
+	$(LD) $(LDFLAGS) -T linker.ld -o kernel.bin $(OBJS)
 
 run: kernel.bin
-	qemu-system-x86_64 -kernel kernel.bin
+	qemu-system-i386 -kernel kernel.bin
 
 clean:
 	rm -f *.o kernel.bin

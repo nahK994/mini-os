@@ -1,4 +1,4 @@
-// kernel/kernel.c
+#include "memory.h"
 
 #define VIDEO_MEMORY 0xB8000
 #define WHITE_ON_BLACK 0x0F
@@ -8,7 +8,6 @@
 int cursor_position = 0;
 extern char _kernel_end;
 
-// screen clear করে
 void clear_screen() {
     char* video_memory = (char*) VIDEO_MEMORY;
 
@@ -21,13 +20,11 @@ void clear_screen() {
     cursor_position = 0;
 }
 
-// newline handle করে
 void new_line() {
     int current_line = cursor_position / SCREEN_WIDTH;
     cursor_position = (current_line + 1) * SCREEN_WIDTH;
 }
 
-// একটা character print করে
 void print_char(char c) {
     if (c == '\n') {
         new_line();
@@ -54,8 +51,6 @@ void print_hex(unsigned int num) {
     print(buffer);
 }
 
-
-// string print করে
 void print(const char* str) {
     int i = 0;
     while (str[i] != '\0') {
@@ -64,11 +59,12 @@ void print(const char* str) {
     }
 }
 
-// kernel entry point
 void kernel_main() {
     clear_screen();
     print("MiniOS is running...\n");
     print("Welcome to your first OS!\n");
-    print("Kernel end address: ");
-    print_hex((unsigned int)&_kernel_end);
+    print("Initializing memory...\n");
+    init_memory();
+
+    print("Memory initialized!\n");
 }
