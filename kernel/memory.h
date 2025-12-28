@@ -4,5 +4,6 @@
 #include <stdint.h>
 
 void init_memory();
+void* kmalloc(uint32_t size);
 
 #endif

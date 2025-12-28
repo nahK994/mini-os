@@ -67,4 +67,9 @@ void kernel_main() {
     init_memory();
 
     print("Memory initialized!\n");
+    char* a = (char*) kmalloc(10);
+    a[0] = 'O';
+    a[1] = 'k';
+    a[2] = '\0';
+    print(a);
 }
