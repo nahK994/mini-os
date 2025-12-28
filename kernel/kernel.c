@@ -67,9 +67,17 @@ void kernel_main() {
     init_memory();
 
     print("Memory initialized!\n");
-    char* a = (char*) kmalloc(10);
-    a[0] = 'O';
-    a[1] = 'k';
-    a[2] = '\0';
-    print(a);
+    char* ch = (char*) kmalloc(10);
+    ch[0] = 'O';
+    ch[1] = 'k';
+    ch[2] = '\0';
+    print(ch);
+    new_line();
+
+    uint32_t a = (uint32_t) kmalloc(1);
+    uint32_t b = (uint32_t) kmalloc(1);
+    print_hex(a);
+    new_line();
+    print_hex(b);
+    new_line();
 }
