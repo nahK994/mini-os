@@ -64,20 +64,11 @@ void kernel_main() {
     print("MiniOS is running...\n");
     print("Welcome to your first OS!\n");
     print("Initializing memory...\n");
-    init_memory();
+    print_memory_stats();
 
-    print("Memory initialized!\n");
-    char* ch = (char*) kmalloc(10);
-    ch[0] = 'O';
-    ch[1] = 'k';
-    ch[2] = '\0';
-    print(ch);
-    new_line();
+    kmalloc(100);
+    kmalloc(200);
 
-    uint32_t a = (uint32_t) kmalloc(1);
-    uint32_t b = (uint32_t) kmalloc(1);
-    print_hex(a);
-    new_line();
-    print_hex(b);
-    new_line();
+    print("\nAfter allocations:\n");
+    print_memory_stats();
 }

@@ -9,18 +9,18 @@ static uint32_t heap_end;
 
 #define ALIGNMENT 4
 
-static uint32_t align_up(uint32_t addr) {
-    if (addr % ALIGNMENT == 0)
-        return addr;
-
-    return addr + (ALIGNMENT - (addr % ALIGNMENT));
-}
-
 
 void init_memory() {
     heap_start = align_up((uint32_t)&_kernel_end);
     free_memory_address = heap_start;
     heap_end = heap_start + HEAP_SIZE;
+}
+
+static uint32_t align_up(uint32_t addr) {
+    if (addr % ALIGNMENT == 0)
+        return addr;
+
+    return addr + (ALIGNMENT - (addr % ALIGNMENT));
 }
 
 void* kmalloc(uint32_t size) {
@@ -34,4 +34,26 @@ void* kmalloc(uint32_t size) {
 
     free_memory_address = next_free;
     return (void*)aligned_address;
+}
+
+void print_memory_stats() {
+    uint32_t used = free_memory_address - heap_start;
+    uint32_t total = heap_end - heap_start;
+    uint32_t free = total - used;
+
+    print("Heap start: ");
+    print_hex(heap_start);
+    print("\n");
+
+    print("Heap end  : ");
+    print_hex(heap_end);
+    print("\n");
+
+    print("Used      : ");
+    print_hex(used);
+    print(" bytes\n");
+
+    print("Free      : ");
+    print_hex(free);
+    print(" bytes\n");
 }
