@@ -1,16 +1,18 @@
 #include "memory.h"
+#include <stdint.h>
 
 extern char _kernel_end;
 
-static uint32_t free_memory_address;
-#define HEAP_SIZE (1024 * 1024)   // 1 MB
+#define ALIGNMENT 4
+#define HEAP_SIZE (1024 * 1024)
+
+static uint32_t align_up(uint32_t addr);
+
 static uint32_t heap_start;
 static uint32_t heap_end;
+static uint32_t free_memory_address;
 
-#define ALIGNMENT 4
-
-
-void init_memory() {
+void init_memory(void) {
     heap_start = align_up((uint32_t)&_kernel_end);
     free_memory_address = heap_start;
     heap_end = heap_start + HEAP_SIZE;
