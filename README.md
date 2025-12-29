@@ -1,6 +1,6 @@
 # MiniOS
 
-MiniOS is a **minimal, educational operating system** built to help backend developers understand  
+MiniOS is a **minimal, educational purpose operating system** built to understand  
 how real servers work **under the hood** — from memory and concurrency to networking and IO.
 
 This project is **not** trying to replace Linux.  
@@ -8,88 +8,23 @@ It is designed to be **small, understandable, and brutally practical**.
 
 ---
 
-## Why this project exists
+## Status
 
-As backend developers, we build APIs, services, caches, and databases every day.
-
-But many important questions stay unclear:
-
-- Why does my server slow down under load?
-- Why do goroutines block or leak?
-- Why is memory usage unpredictable?
-- Why does disk IO or networking become a bottleneck?
-
-MiniOS exists to answer these questions by **building the fundamentals ourselves**.
+🚧 Work in progress  
+Built step by step as a learning project.
 
 ---
 
 ## Core Idea (Very Simple)
 
-> If you understand how an operating system manages memory, tasks, and IO,  
-> you will become a much stronger backend developer.
+> Small systems teach big lessons.
+>
+> If you understand how an operating system manages memory, tasks, and IO, you will become a much stronger backend developer.
 
-MiniOS focuses only on the parts that directly matter for backend systems.
 
----
+MiniOS focuses only on the parts that directly matter for backend systems. This OS is intentionally small so that **every line of code can be understood**.
 
-## Selling Points
-
-### 1. Built for Backend Developers
-This OS is not academic and not POSIX-complete.
-
-Every concept maps directly to backend problems:
-- Tasks ≈ Requests
-- Scheduler ≈ Worker pool
-- Syscalls ≈ API boundaries
-- Memory pressure ≈ GC pressure
-
----
-
-### 2. Minimal Scope, Maximum Clarity
-- No complex drivers
-- No legacy compatibility
-- No unnecessary abstractions
-
-Only:
-- Memory management
-- Task scheduling
-- Networking basics
-- File and IO handling
-
----
-
-### 3. Request-Centric Design
-Instead of focusing on full processes, MiniOS treats **requests** as first-class citizens.
-
-This makes it easier to reason about:
-- Timeouts
-- Fairness
-- Backpressure
-- Resource limits
-
----
-
-### 4. Failure Is a Feature
-The system is intentionally designed to:
-- Handle slow clients
-- Handle partial writes
-- Expose crashes clearly
-- Teach graceful shutdown
-
-Just like real production systems.
-
----
-
-### 5. Observability First
-The OS exposes:
-- Task counts
-- Memory usage
-- Queue depth
-- Simple logs
-
-Because production systems live and die by observability.
-
----
+<!-- ---
 
 ## What This OS Is NOT
 
@@ -98,13 +33,11 @@ Because production systems live and die by observability.
 - ❌ Not production-ready
 - ❌ Not feature-complete
 
-This is a **learning-first system**.
+This is a **learning-first system**. -->
 
 ---
 
 ## Learning Goals
-
-By building MiniOS, you will learn:
 
 - How memory allocation really works
 - How concurrency is scheduled
@@ -114,14 +47,14 @@ By building MiniOS, you will learn:
 
 ---
 
-## Roadmap (Backend-Focused)
+## Roadmap
 
 ### Phase 1: Boot & Kernel Skeleton
 - Minimal boot
 - Kernel entry point
 - Basic loop
 
-**Backend takeaway:**  
+**Takeaway:**  
 Application startup and initialization order.
 
 ---
@@ -131,7 +64,7 @@ Application startup and initialization order.
 - Simple allocator
 - Memory limits
 
-**Backend takeaway:**  
+**Takeaway:**  
 Understanding memory usage, leaks, and GC pressure.
 
 ---
@@ -141,7 +74,7 @@ Understanding memory usage, leaks, and GC pressure.
 - Simple scheduler
 - Shared state issues
 
-**Backend takeaway:**  
+**Takeaway:**  
 Worker pools, race conditions, and deadlocks.
 
 ---
@@ -151,7 +84,7 @@ Worker pools, race conditions, and deadlocks.
 - Argument validation
 - Error handling
 
-**Backend takeaway:**  
+**Takeaway:**  
 API design, trust boundaries, and validation.
 
 ---
@@ -161,7 +94,7 @@ API design, trust boundaries, and validation.
 - Blocking vs non-blocking IO
 - Buffers
 
-**Backend takeaway:**  
+**Takeaway:**  
 HTTP behavior, timeouts, slow clients.
 
 ---
@@ -171,7 +104,7 @@ HTTP behavior, timeouts, slow clients.
 - Simple storage
 - Durability concepts
 
-**Backend takeaway:**  
+**Takeaway:**  
 Database latency, logging, and storage tradeoffs.
 
 ---
@@ -181,7 +114,7 @@ Database latency, logging, and storage tradeoffs.
 - Resource cleanup
 - Error boundaries
 
-**Backend takeaway:**  
+**Takeaway:**
 Production readiness and resilience.
 
 ---
@@ -189,24 +122,7 @@ Production readiness and resilience.
 ## Target Audience
 
 - Backend developers curious about systems
-- Developers who want to go beyond CRUD
 - Engineers interested in performance and reliability
-- Anyone who wants to understand servers deeply
-
----
-
-## Philosophy
-
-> Small systems teach big lessons.
-
-This OS is intentionally small so that **every line of code can be understood**.
-
----
-
-## Status
-
-🚧 Work in progress  
-Built step by step as a learning project.
 
 ---
 
