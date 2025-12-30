@@ -1,128 +1,163 @@
 # MiniOS
 
-MiniOS is a **minimal, educational purpose operating system** built to understand  
-how real servers work **under the hood** — from memory and concurrency to networking and IO.
+MiniOS is a **minimal, educational operating system** built to deeply understand  
+how real systems work **under the hood** — from memory and execution to isolation and IO.
 
-This project is **not** trying to replace Linux.  
-It is designed to be **small, understandable, and brutally practical**.
+This project is **not** about replacing Linux.  
+It is about **building engineering intuition** by stripping systems down to their core.
 
 ---
 
 ## Status
 
-🚧 Work in progress  
-Built step by step as a learning project.
+🚧 Work in progress
 
 ---
 
-## Core Idea (Very Simple)
+## Core Philosophy
 
-> Small systems teach big lessons.
->
-> If you understand how an operating system manages memory, tasks, and IO, you will become a much stronger backend developer.
-
-
-MiniOS focuses only on the parts that directly matter for backend systems. This OS is intentionally small so that **every line of code can be understood**.
-
-<!-- ---
-
-## What This OS Is NOT
-
-- ❌ Not Linux
-- ❌ Not POSIX compliant
-- ❌ Not production-ready
-- ❌ Not feature-complete
-
-This is a **learning-first system**. -->
+Small systems teach big lessons.
 
 ---
 
-## Learning Goals
+## Engineering Roadmap (Chapters)
 
-- How memory allocation really works
-- How concurrency is scheduled
-- How IO blocks and unblocks systems
-- Why slow clients hurt performance
-- How backend servers behave under load
+### Chapter 0: Engineering Grounding (Mental Model)
+**Goal:** Think like a systems engineer before writing code.
 
----
+**Concepts**
+- Program vs Process vs Kernel
+- Memory as a byte array
+- Pointer vs ownership
+- Undefined behavior and why kernels fear it
 
-## Roadmap
-
-### Phase 1: Boot & Kernel Skeleton
-- Minimal boot
-- Kernel entry point
-- Basic loop
-
-**Takeaway:**  
-Application startup and initialization order.
+**Checkpoint**
+- Able to explain why dangling pointers are dangerous
+- Able to reason about memory without tools
 
 ---
 
-### Phase 2: Memory Management
-- Stack vs heap
-- Simple allocator
-- Memory limits
+### Chapter 1: Boot & Kernel Skeleton
+**Goal:** Understand how code starts running on bare metal.
 
-**Takeaway:**  
-Understanding memory usage, leaks, and GC pressure.
+**Concepts**
+- CPU reset state
+- Bootloader responsibility
+- Real mode vs Protected mode
+- Jumping into the kernel
 
----
-
-### Phase 3: Task Scheduling
-- Cooperative tasks
-- Simple scheduler
-- Shared state issues
-
-**Takeaway:**  
-Worker pools, race conditions, and deadlocks.
+**Engineering Takeaway**
+> Initialization order matters more than code elegance.
 
 ---
 
-### Phase 4: Syscall-like Interface
-- Controlled entry points
-- Argument validation
-- Error handling
+### Chapter 2: Memory Is the First Lie
+**Goal:** Learn how memory really works inside a kernel.
 
-**Takeaway:**  
-API design, trust boundaries, and validation.
+**Concepts**
+- Linker script and symbols (`_kernel_end`)
+- Stack vs heap (OS perspective)
+- Alignment and invariants
+- Bump allocator
+- Why early `kfree()` is fake but useful
+
+**Engineering Takeaway**
+> Allocation strategy defines system behavior.
+
+**Checkpoint**
+- Able to explain why `kfree()` doesn’t delete variables
+- Able to explain allocator invariants
+- Able to debug memory corruption mentally
 
 ---
 
-### Phase 5: Networking Basics
-- Socket abstraction
-- Blocking vs non-blocking IO
+### Chapter 3: Memory Stops Being Linear
+**Goal:** Understand why virtual memory exists.
+
+**Concepts**
+- Paging
+- Page tables
+- MMU
+- Address translation
+- Isolation
+
+**Engineering Takeaway**
+> Memory is not what you touch, it’s what the CPU allows you to see.
+
+---
+
+### Chapter 4: Time Is a Shared Resource
+**Goal:** Learn how execution is shared.
+
+**Concepts**
+- Interrupts
+- Timers
+- Context switching
+- Scheduling strategies
+
+**Engineering Takeaway**
+> CPU time is more valuable than memory.
+
+---
+
+### Chapter 5: Trust Boundaries & Syscalls
+**Goal:** Separate user intent from kernel authority.
+
+**Concepts**
+- Privilege levels
+- Syscall interface
+- Validation
+- Fault handling
+
+**Engineering Takeaway**
+> User code is untrusted by default.
+
+---
+
+### Chapter 6: IO, Files, and Persistence
+**Goal:** Understand durability and latency.
+
+**Concepts**
+- File abstractions
 - Buffers
+- Blocking vs non-blocking IO
+- Persistence guarantees
 
-**Takeaway:**  
-HTTP behavior, timeouts, slow clients.
-
----
-
-### Phase 6: File & Persistence
-- Read/write abstraction
-- Simple storage
-- Durability concepts
-
-**Takeaway:**  
-Database latency, logging, and storage tradeoffs.
+**Engineering Takeaway**
+> Fast systems are designed, not optimized.
 
 ---
 
-### Phase 7: Stability & Shutdown
-- Graceful shutdown
+### Chapter 7: Stability, Failure, and Shutdown
+**Goal:** Build systems that fail predictably.
+
+**Concepts**
 - Resource cleanup
 - Error boundaries
+- Graceful shutdown
+- Panic paths
 
-**Takeaway:**
-Production readiness and resilience.
+**Engineering Takeaway**
+> Production systems are defined by how they fail.
 
 ---
 
 ## Target Audience
 
-- Backend developers curious about systems
-- Engineers interested in performance and reliability
+- Engineers curious about performance, memory, and reliability
+- Anyone who wants to **understand before scaling**
+
+---
+
+## Learning Contract
+
+This project follows a strict rule:
+
+> No phase skipping.  
+> No magical code.  
+> No “just trust this”.
+
+Every concept must be explainable in plain language.
 
 ---
 
