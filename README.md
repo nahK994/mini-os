@@ -20,7 +20,7 @@ Small systems teach big lessons.
 
 ---
 
-## Engineering Roadmap (Chapters)
+<!-- ## Engineering Roadmap (Chapters)
 
 ### Chapter 0: Engineering Grounding (Mental Model)
 **Goal:** Think like a systems engineer before writing code.
@@ -140,24 +140,12 @@ Small systems teach big lessons.
 **Engineering Takeaway**
 > Production systems are defined by how they fail.
 
----
+--- -->
 
 ## Target Audience
 
 - Engineers curious about performance, memory, and reliability
 - Anyone who wants to **understand before scaling**
-
----
-
-## Learning Contract
-
-This project follows a strict rule:
-
-> No phase skipping.  
-> No magical code.  
-> No “just trust this”.
-
-Every concept must be explainable in plain language.
 
 ---
 
